@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import api from "../api";
-import Note from "../components/Note"
-import '../styles/Home.css'
+import Note from "../components/Note";
+// import User from "../components/User";
+import "../styles/Home.css";
+import {Link} from 'react-router-dom'
+
+// import {Logout} from '../App'
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -47,8 +51,31 @@ function Home() {
       .catch((err) => alert(err));
   };
 
+  api.get("/api/notes/")
+  .then(response => {
+    console.log("Notes:", response.data);
+  })
+  .catch(error => {
+    console.error("Error fetching notes:", error);
+  });
+
+  
+
   return (
     <div>
+      <div>
+        <Link to='/logout'>
+          <button className="logout-button">
+            Logout
+          </button>
+        </Link>
+        <Link to='/'>
+          <button className="logout-button">
+            Index
+          </button>
+        </Link>
+      </div>
+      
       <div>
         <h2>Notes</h2>
         {notes.map((note) => (

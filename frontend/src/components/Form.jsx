@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import '../styles/Form.css'
 import LoadingIndicator from "./LoadingIndicator";
@@ -12,6 +12,16 @@ function Form({ route, method }) {
   const navigate = useNavigate();
 
   const name = method === "login" ? "Login" : "Register";
+  let customDiv;
+  // let dropdown;
+
+  if (name === "Login") {
+    customDiv = <div>Don't have an account yet? <Link to='/register'>Register</Link></div>
+  } 
+  if (name === "Register") {
+    customDiv = <div>Already have an account? <Link to="/login">Login</Link></div>
+
+  }
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -23,7 +33,7 @@ function Form({ route, method }) {
       if (method === 'login') {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-        navigate('/')
+        navigate('/home')
       } else {
         navigate('/login');
       }
@@ -57,10 +67,13 @@ function Form({ route, method }) {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
+      {/* {dropdown} */}
+      {/* <input>{dropdown}</input> */}
       {loading && <LoadingIndicator/>}
       <button className="form-button" type="submit">
         {name}
       </button>
+      <div>{customDiv}</div>
     </form>
   );
 }
