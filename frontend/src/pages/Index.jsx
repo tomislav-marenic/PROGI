@@ -123,7 +123,7 @@ function Index() {
       .catch((error) => {
         console.error("Error fetching notes:", error);
       });
-
+      
   return (
     <div>
       <h1>Index page</h1>
