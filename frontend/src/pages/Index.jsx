@@ -115,14 +115,14 @@ function Index() {
     // });
   };
 
-  //   api
-  //     .get("/api/users/")
-  //     .then((response) => {
-  //       console.log("Usernames:", response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching notes:", error);
-  //     });
+    api
+      .get("/api/users/")
+      .then((response) => {
+        console.log("Usernames:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching notes:", error);
+      });
 
   return (
     <div>
